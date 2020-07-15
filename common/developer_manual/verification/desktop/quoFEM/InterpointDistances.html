@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4.1. Interpoint Distances &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="5. Coding Style" href="../../../coding_style/desktop/coding_style.html" />
+    <link rel="prev" title="4. Verification" href="../verification.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+
+          
+            <a href="../../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../../_static/quoFEM-LogoImageGrey.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/ack.html">1. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/about/quoFEM/aboutQUOFEM.html">2. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/installation/desktop/installation.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/usage/desktop/usage.html">4. User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/examples/desktop/examples.html">6. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/license.html">8. Copyright and License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../verification.html">4. Verification</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1. Interpoint Distances</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_manual/schemas/schema.html">6. Input File Schema</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../verification.html"><span class="section-number">4. </span>Verification</a> &raquo;</li>
+        
+      <li><span class="section-number">4.1. </span>Interpoint Distances</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/common/developer_manual/verification/desktop/quoFEM/InterpointDistances.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interpoint-distances">
+<span id="lblinterpointdistveri"></span><h1><span class="section-number">4.1. </span>Interpoint Distances<a class="headerlink" href="#interpoint-distances" title="Permalink to this headline">¶</a></h1>
+<p>This is not a structural example, it is one used in the literature to verify sampling methods as a mathematical formula
+exists for the solution. The example presented is computing the average distance between randomly chosen points
+in a rectangular region. Such average distances come up in many settings. For cell phone companies, the probability that a distributed network is fully connected depends on average distances between communicating nodes. For city planners preparing for disasters,
+it could represent the average distances from dwellings to fire stations or from the dwellings to the epicenter of an earthquake.</p>
+<p>The problem is defined as follows: Suppose two points <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> are independent and considered uniformly distributed random points in a finite rectangle of dimension <span class="math notranslate nohighlight">\(L_w\)</span> and <span class="math notranslate nohighlight">\(L_h\)</span>. It has been <a class="reference external" href="http://www.math.utep.edu/Faculty/moschopoulos/Publications/1999-Random_Points_Associated_With_Rectangles.pdf">shown</a> that the expected average distance between these two points <span class="math notranslate nohighlight">\(E(P,Q)\)</span> is given by the formula:</p>
+<div class="math notranslate nohighlight" id="equation-common-developer-manual-verification-desktop-quofem-interpointdistances-0">
+<span class="eqno">(4.1.2)<a class="headerlink" href="#equation-common-developer-manual-verification-desktop-quofem-interpointdistances-0" title="Permalink to this equation">¶</a></span>\[E(P,Q) = \frac{1}{15} \left( \frac{L_w^3}{L_h^2}+\frac{L_h^3}{L_w^2}+d\left(3-\frac{L_w^2}{L_h^2}-\frac{L_h^2}{L_w^2}\right)
++\frac{5}{2} \left(\frac{L_h^2}{L_w}\log\right(\frac{L_w+d}{L_h}\left)+\frac{L_w^2}{L_h}\log\left(\frac{L_h+d}{L_w}\right)\right)\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(d=\sqrt{L_w^2+L_h^2}\)</span></p>
+<p>Using the above formula one can compute a number of expected distances for rectangles of different sizes, for example:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Lw</p></th>
+<th class="head"><p>Lh</p></th>
+<th class="head"><p>E</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0</p></td>
+<td><p>0.6</p></td>
+<td><p>0.4239</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.0</p></td>
+<td><p>0.8</p></td>
+<td><p>0.7651</p></td>
+</tr>
+<tr class="row-even"><td><p>10.0</p></td>
+<td><p>7.5</p></td>
+<td><p>4.5865</p></td>
+</tr>
+<tr class="row-odd"><td><p>10.0</p></td>
+<td><p>10.0</p></td>
+<td><p>7.7502</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above table was computed using the following Matlab script, run repeatedly for different values of <code class="docutils literal notranslate"><span class="pre">Lw</span></code> and <code class="docutils literal notranslate"><span class="pre">Lh</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Lw</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">Lh</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Lh</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">Lw</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">15</span><span class="o">*</span><span class="p">(</span><span class="n">Lw</span><span class="o">^</span><span class="mi">3</span><span class="o">/</span><span class="n">Lh</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Lh</span><span class="o">^</span><span class="mi">3</span><span class="o">/</span><span class="n">Lw</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span> <span class="n">Lw</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="n">Lh</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="n">Lh</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="n">Lw</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">Lh</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="n">Lw</span> <span class="o">*</span> <span class="n">log</span><span class="p">((</span><span class="n">Lw</span><span class="o">+</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">Lh</span><span class="p">)</span> <span class="o">+</span> <span class="n">Lw</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">log</span><span class="p">((</span><span class="n">Lh</span><span class="o">+</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">Lw</span><span class="p">)))</span>
+
+</pre></div>
+</div>
+</div>
+<p>In the following steps we will demonstrate how this is done using the quoFEM app with figures showing the inputs for case with <code class="docutils literal notranslate"><span class="pre">Lw=1.0</span></code>, <code class="docutils literal notranslate"><span class="pre">Lh=</span> <span class="pre">0.6</span></code> and utilizing <strong>LHS</strong> with 1000 samples. A table will provide additional results for other sampling methods and numbers of samples.</p>
+<ol class="arabic simple">
+<li><p>Repeating this exercise in quoFEM requires using either the OpenSees or the OpenSeesPy Interpreter. Depending on your choice, create a <em>new</em> folder and in it place one of the following files, the first is a Python script to be named <code class="docutils literal notranslate"><span class="pre">ghosh.py</span></code>. It is to be used with the OpenSeesPy FEM application.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="s2">&quot;RV.x1&quot;</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="s2">&quot;RV.y1&quot;</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="s2">&quot;RV.x2&quot;</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="s2">&quot;RV.y2&quot;</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">))</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;results.out&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p>The second a tcl script to be named ghosh.tcl. It is to be used with the OpenSees FEM application.</p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="c"># note: the variables x1, y1, x2, y2 will be provided when runs in workflow</span>
+<span class="c"># as long as they are defined as random variables</span>
+
+<span class="k">set</span> D <span class="k">[expr</span> sqrt<span class="k">((</span><span class="nv">$x2-$x1</span><span class="k">)</span><span class="o">*</span><span class="k">(</span><span class="nv">$x2-$x1</span><span class="k">)</span><span class="o">+</span><span class="k">(</span><span class="nv">$y2-$y1</span><span class="k">)</span><span class="o">*</span><span class="k">(</span><span class="nv">$y2-$y1</span><span class="k">))]</span>
+
+<span class="k">set</span> f <span class="k">[</span><span class="nb">open</span> <span class="s2">&quot;results.out&quot;</span> <span class="s2">&quot;w&quot;</span><span class="k">]</span>
+<span class="nb">puts</span> <span class="nv">$f</span> <span class="nv">$D</span>
+<span class="nb">close</span> <span class="nv">$f</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Start the quoFEM app and select Dakota UQ Engine, Forward propagation type of problem and LHS method. Specify <code class="docutils literal notranslate"><span class="pre">10000</span></code> samples and a seed of <code class="docutils literal notranslate"><span class="pre">175</span></code>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/ghoshUQ.png" src="../../../../../_images/ghoshUQ.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Select next the <strong>FEM</strong> tab. From this tab select either OpenSees or OpenSeesPy depending on which file you choose to place in the folder. For the input file specify the full path to this file.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/ghoshFEM.png" src="../../../../../_images/ghoshFEM.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Select the <strong>RV</strong> tab. Create 4 random variables named <code class="docutils literal notranslate"><span class="pre">X1</span></code>, <code class="docutils literal notranslate"><span class="pre">Y1</span></code>, <code class="docutils literal notranslate"><span class="pre">X2</span></code>, <code class="docutils literal notranslate"><span class="pre">Y2</span></code>. For each specify a uniform distribution with the range for the X variables being 0 and <code class="docutils literal notranslate"><span class="pre">Lw</span></code> and range of Y variables being 0 and <code class="docutils literal notranslate"><span class="pre">Lh</span></code>. This is as shown for <code class="docutils literal notranslate"><span class="pre">Lw</span> <span class="pre">=</span> <span class="pre">1.0</span></code> and <code class="docutils literal notranslate"><span class="pre">Lh</span> <span class="pre">=</span> <span class="pre">0.6</span></code>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/ghoshRV.png" src="../../../../../_images/ghoshRV.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Select the <strong>QoI</strong> tab. Create one EDP and name it <code class="docutils literal notranslate"><span class="pre">E</span></code> as shown.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/ghoshQoI.png" src="../../../../../_images/ghoshQoI.png" />
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Press the Run button. The results should show the mean to be <code class="docutils literal notranslate"><span class="pre">0.425709</span></code>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/ghoshRES.png" src="../../../../../_images/ghoshRES.png" />
+</div>
+<p>These simulations can be performed for a number of the different sampling methods for a number of different number of samples.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>#Samples</p></th>
+<th class="head"><p>E(P,Q)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MC</p></td>
+<td><p>100</p></td>
+<td><p>0.447626</p></td>
+</tr>
+<tr class="row-odd"><td><p>MC</p></td>
+<td><p>1000</p></td>
+<td><p>0.430936</p></td>
+</tr>
+<tr class="row-even"><td><p>MC</p></td>
+<td><p>10000</p></td>
+<td><p>0.421910</p></td>
+</tr>
+<tr class="row-odd"><td><p>LHS</p></td>
+<td><p>100</p></td>
+<td><p>0.435349</p></td>
+</tr>
+<tr class="row-even"><td><p>LHS</p></td>
+<td><p>1000</p></td>
+<td><p>0.425709</p></td>
+</tr>
+<tr class="row-odd"><td><p>LHS</p></td>
+<td><p>10000</p></td>
+<td><p>0.422350</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, The Regents of the University of California
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+
+
+</body>
+</html>

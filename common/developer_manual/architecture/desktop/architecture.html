@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Software Architecture &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="3. How to Extend" href="../../how_to_extend/desktop/how_to_extend.html" />
+    <link rel="prev" title="1. How to Build" href="../../how_to_build/desktop/how_to_build.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+
+          
+            <a href="../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../_static/quoFEM-LogoImageGrey.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/ack.html">1. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/about/quoFEM/aboutQUOFEM.html">2. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/installation/desktop/installation.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/usage/desktop/usage.html">4. User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/examples/desktop/examples.html">6. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/license.html">8. Copyright and License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Software Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#level-1-a-context-for-simcenter-applications">2.1. Level 1: A Context for SimCenter Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#level-2-the-components-of-a-simcenter-application">2.2. Level 2:  The Components of a SimCenter Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#level-3-container-diagrams-for-the-front-and-back-end-components">2.3. Level 3: Container Diagrams for the Front and Back End Components</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual/schemas/schema.html">6. Input File Schema</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Software Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/common/developer_manual/architecture/desktop/architecture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="software-architecture">
+<span id="lblarchitecture"></span><h1><span class="section-number">2. </span>Software Architecture<a class="headerlink" href="#software-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The SimCenter is developing a software framework for building applications that run <strong>scientific workflow applications</strong> to perform computational simulations in field of NHE at both building level scale and regionsl scale. It is releasing a number of applications built using this framework. The quoFEM app is one of those applications which have been released (EE-UQ, WE-UQ, PBE). Other applications are under development (RDT). The applications that the SimCenter are developing are limited <strong>scientific workflow systems</strong>. This chapter presents the software architecture for the framework and the quoFEM app built using it using the <a class="reference external" href="https://c4model.com">C4 model</a>. The following sections present the architecture to level 3:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><strong>Workflow</strong>: A sequence of steps involved in moving from a beginning state to an ending state.</p></li>
+<li><p><strong>Scientific Workflow Application</strong>: An application that automates a workflow process through software, with each step in the workflow being performed by a separate “scientific” software application.</p></li>
+<li><p><strong>Scientific Workflow System</strong>: software providing an infrastructure for the set-up, scheduling, running, and monitoring of a user defined scientific workflow application.</p></li>
+</ol>
+</div>
+<div class="section" id="level-1-a-context-for-simcenter-applications">
+<h2><span class="section-number">2.1. </span>Level 1: A Context for SimCenter Applications<a class="headerlink" href="#level-1-a-context-for-simcenter-applications" title="Permalink to this headline">¶</a></h2>
+<p>A Level 1 diagram showing the system context for the SimCenter applications, i.e. how it fits in the world,  is shown in <a class="reference internal" href="#figcontext"><span class="std std-numref">Fig. 2.1.1</span></a>. It shows SimCenter applications (EE-UQ, WE-UQ, PBE, RDT) as a box in the center surrounded by the user and the systems it and the user interact with. The SimCenter applications allows user to create and run scientific workflow applications, the data for the applications may be obtained from the web or DataDepot, the workflow applications are run on either the local desktop or on some HPC at <a class="reference external" href="https://designsafe-ci.org">DesignSafe</a>.</p>
+<div class="align-center figure" id="id1">
+<span id="figcontext"></span><img alt="../../../../_images/context.png" src="../../../../_images/context.png" />
+<p class="caption"><span class="caption-number">Fig. 2.1.1 </span><span class="caption-text">System context diagram for SimCenter applications.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="level-2-the-components-of-a-simcenter-application">
+<h2><span class="section-number">2.2. </span>Level 2:  The Components of a SimCenter Application<a class="headerlink" href="#level-2-the-components-of-a-simcenter-application" title="Permalink to this headline">¶</a></h2>
+<p>Given how SimCenter applications fit in with the environment, a level 2 diagrams now demonstrates how the SimCenter applications are broken into high level components. The SimCenter applications are, as shown in <a class="reference internal" href="#figcontainer"><span class="std std-numref">Fig. 2.2.1</span></a>, broken into two components: A front end UI and a back end application that runs the workflow. The front end applications are desktop applications written using the cross-platform Qt framework. The back end is an application that processes the input from the front end, which comes in the form of a JSON file, creates a workflow and runs it. The workflow applications, written in Python, C, or C++, utilize existing applications were possible and run on either the local desktop machine or on a HPC utilizing resources made available to NHE community through DesignSafe.</p>
+<div class="align-center figure" id="id2">
+<span id="figcontainer"></span><img alt="../../../../_images/container.png" src="../../../../_images/container.png" />
+<p class="caption"><span class="caption-number">Fig. 2.2.1 </span><span class="caption-text">System container diagram for SimCenter applications.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="level-3-container-diagrams-for-the-front-and-back-end-components">
+<h2><span class="section-number">2.3. </span>Level 3: Container Diagrams for the Front and Back End Components<a class="headerlink" href="#level-3-container-diagrams-for-the-front-and-back-end-components" title="Permalink to this headline">¶</a></h2>
+<p>Two level 3 diagrams are now presented which break up the two containers into the major building blocks or components in C4 terminology. In <a class="reference internal" href="#figcomponentfront"><span class="std std-numref">Fig. 2.3.1</span></a> the component diagram for the front end UI is presented. It outlines the interaction between the user and the individual graphical elements (widgets) of the UI. Given the analogy of a jigsaw puzzle, the user selects which piece of the jigsaw puzzle they are working on in the component selection widget. The widget for the jigsaw piece will then be displayed on the desktop. The user for each jigsaw piece then selects which application to run for that piece, and for the chosen application, they provide the inputs. When the inputs are all provided, the user can select to run the simulations locally or remotely. For jobs that run remotely, the user can download and review previously run simulations. As seen the widgets may subsequently interact with web services through HTTPS requests, or with DesignSafe utilizing TAPIS Restful API through the RemoteService container.</p>
+<div class="align-center figure" id="id3">
+<span id="figcomponentfront"></span><img alt="../../../../_images/componentFront.png" src="../../../../_images/componentFront.png" />
+<p class="caption"><span class="caption-number">Fig. 2.3.1 </span><span class="caption-text">Component diagram for front end UI.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>The component diagram for the backend application shown in <a class="reference internal" href="#figcomponentback"><span class="std std-numref">Fig. 2.3.2</span></a>, shows that the backend is made up of a number of component, all applications. The application <code class="docutils literal notranslate"><span class="pre">femUQ.py</span></code> is the application that parses the input from the front end, sets up the workflow and launches the UQ engine. Which UQ Engine and which applications to run in the workflow, is determined from the data passed from the UI and information contained in a WorkflowApplication.json file. A file is used to allow the researchers to modify the applications that may be run in the workflow w/o the need to recompile the application. Control is then passed to a UQ engine, which repeatedly runs the workflow to generate the results. In running the workflow some of the applications will invoke applications not developed to meet the API. For such applications pre- and post-processors are provided.
+The figure shows the backend application running locally or remotely on a <a class="reference external" href="mailto:HPC&#37;&#52;&#48;DesignSafe">HPC<span>&#64;</span>DesignSafe</a>.</p>
+<div class="align-center figure" id="id4">
+<span id="figcomponentback"></span><img alt="../../../../_images/componentBack.png" src="../../../../_images/componentBack.png" />
+<p class="caption"><span class="caption-number">Fig. 2.3.2 </span><span class="caption-text">Component diagram for backend application.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, The Regents of the University of California
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+
+
+</body>
+</html>

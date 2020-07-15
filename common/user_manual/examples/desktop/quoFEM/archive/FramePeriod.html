@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+
+          
+            <a href="../../../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../../../_static/quoFEM-LogoImageGrey.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ack.html">1. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation/desktop/installation.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage/desktop/usage.html">4. User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">6. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">8. Copyright and License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Steel Frame: Parameter Estimation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../../_sources/common/user_manual/examples/desktop/quoFEM/archive/FramePeriod.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="steel-frame-parameter-estimation">
+<h1>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
+<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <a class="reference internal" href="../quo-07.html#lbljoelframe"><span class="std std-numref">Fig. 6.7.1</span></a>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
+<div class="align-center figure" id="id1">
+<span id="lbljoelframe"></span><a class="reference internal image-reference" href="common\user_manual\examples\desktop\quoFEM\archive\figures/joelFrame.png"><img alt="common\user_manual\examples\desktop\quoFEM\archive\figures/joelFrame.png" src="common\user_manual\examples\desktop\quoFEM\archive\figures/joelFrame.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantities, m1 and m2, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>variable</p></th>
+<th class="head"><p>lower (k-in/sec^2)</p></th>
+<th class="head"><p>upper (k-in/sec^2)</p></th>
+<th class="head"><p>initial estimate (k-in/sec^2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>m1</p></td>
+<td><p>0.4</p></td>
+<td><p>0.8</p></td>
+<td><p>0.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>m2</p></td>
+<td><p>0.1</p></td>
+<td><p>0.4</p></td>
+<td><p>0.1</p></td>
+</tr>
+</tbody>
+</table>
+<p>The goal of this exercise it to come up with estimates of these quantities using the quoFEM app that result in reasonably good matches between finite element model periods and the observed periods of the structure.</p>
+<p>The exercise requires a single OpenSees script file. The user is required to download this file and place it in a <strong>NEW</strong> folder. The file:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/calibrationPeriods/FrameModelPeriodCalibration.tcl">FrameModelPeriodCalibration.tcl</a></p></li>
+</ol>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span># units kips, in
+
+set measuredPeriods {0.19 0.08}
+set PI 3.14159
+
+#
+# some paramaters
+#
+
+pset m1 0.52
+pset m2 0.26
+
+set L  400.0
+set h  120.0
+set E 29000.0 
+
+set Ac 110.0 
+set Ic 1190.0
+set Ib 10e+8
+set Ab 10e+8 
+
+#
+# build the model
+#
+
+model BasicBuilder -ndm 2 -ndf 3	
+# nodes
+node 1   0.  0. ; 
+node 2   $L  0. ;
+node 3   0.  $h -mass [expr $m1/4.] 0 0
+node 4   $L  $h -mass [expr $m1/4.0] 0 0
+node 5   0.  [expr 2*$h] -mass [expr $m2/4.0] 0 0
+node 6   $L  [expr 2*$h] -mass [expr $m2/4.0] 0 0
+# constraints
+fix 1 1 1 1;
+fix 2 1 1 1;
+equalDOF 3 4 1;
+equalDOF 5 6 1 
+# elements
+set TransfTag 1;
+geomTransf Linear $TransfTag ;
+element elasticBeamColumn 1 1 3 $Ac $E $Ic $TransfTag; 
+element elasticBeamColumn 2 3 5 $Ac $E $Ic $TransfTag; 
+element elasticBeamColumn 3 2 4 $Ac $E $Ic $TransfTag; 
+element elasticBeamColumn 4 4 6 $Ac $E $Ic $TransfTag; 
+element elasticBeamColumn 5 3 4 $Ab $E $Ib $TransfTag; 
+element elasticBeamColumn 6 5 6 $Ab $E $Ib $TransfTag;
+
+# calculate eigenvalues
+set numModes 2
+set eigenValues [eigen -fullGenLapack $numModes]
+set error {}
+for {set i 0} {$i&lt;$numModes} {incr i 1} {
+    set period [expr 2*$PI/sqrt([lindex $eigenValues $i])]
+    puts $period
+    lappend error [expr abs([lindex $measuredPeriods $i] - $period)]
+}
+
+# create results file
+set outFile [open &quot;results.out&quot; w]
+puts $outFile &quot;$error&quot;
+close $outFile
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The tcl script when it runs creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code>. As a consequence, no postprocessing script is needed.</p></li>
+<li><p>The values placed in <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file are the difference between computed and observed values. Expressed another way, the function <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span></code> computed and written to the  <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is <code class="docutils literal notranslate"><span class="pre">f(m1,m2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(m1,m2)</span></code>. The UQ algorithm when running is searching for values of the random variable parameters (<code class="docutils literal notranslate"><span class="pre">m1</span></code> and <code class="docutils literal notranslate"><span class="pre">m2</span></code>) that attempt to minimize the function. The user must take this fact into account when formulating the output from their own scripts for their own problems.</p></li>
+</ol>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like me, your root, Downloads or Documents folders contains and awful lot of files.</p>
+</div>
+<p>The steps involved:</p>
+<ol class="arabic simple">
+<li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota. In the UQ Method category drop down menu change the category to <strong>Parameters Estimation</strong>, and the method as <strong>NL2SOL</strong>, the convergence tolerance to <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code> and leave the scaling factors empty (assumes weights of 1.0 on all response values) as shown in the figure.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="common\user_manual\examples\desktop\quoFEM\archive\figures/joelUQ.png" src="common\user_manual\examples\desktop\quoFEM\archive\figures/joelUQ.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Next select the <strong>FEM</strong> tab from the input panel selection. This will default in the OpenSees FEM engine. For the main script copy the path name to the FrameModelPeriodSelection.tcl file or select choose and navigate to the file.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="common\user_manual\examples\desktop\quoFEM\archive\figures/joelFEM.png" src="common\user_manual\examples\desktop\quoFEM\archive\figures/joelFEM.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As discussed but it is worth noting again, because the script generates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file, no postprocessing script is needed for this example. This might not always be the case for some of your problems.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Next select the <strong>RV</strong> tab from the input panel. This should be prepopulated with two random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script, i.e. m1 and m2. For each variable, from the drop down menu change them from having a constant distribution to a continuous design one and then provide the lower bounds, upper bounds and the starting points shown in the figure below.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="common\user_manual\examples\desktop\quoFEM\archive\figures/joelRV.png" src="common\user_manual\examples\desktop\quoFEM\archive\figures/joelRV.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the Parameter Estimation category of UQ methods, only continuous design distributions may be entered.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Next select the <strong>QoI</strong> panel. Here enter <strong>2</strong> variable names <code class="docutils literal notranslate"><span class="pre">dT1</span></code> and <code class="docutils literal notranslate"><span class="pre">dT2</span></code>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="common\user_manual\examples\desktop\quoFEM\archive\figures/joelQoI.png" src="common\user_manual\examples\desktop\quoFEM\archive\figures/joelQoI.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by Dakota to return information on the errors. We used ‘dT1’ and ‘dT2’ due to our affinity for 3 letter acronyms!</p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch Dakota. When done the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters to be <span class="math notranslate nohighlight">\(m1=0.52 (0.515549)\)</span> and <span class="math notranslate nohighlight">\(m2=0.26 (0.256492)\)</span>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="common\user_manual\examples\desktop\quoFEM\archive\figures/joelRES.png" src="common\user_manual\examples\desktop\quoFEM\archive\figures/joelRES.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The computed values compare favorably to the values used to generate the ‘observed results’ when developing this problem, these being the values shown in the script, i.e. <span class="math notranslate nohighlight">\(m1=0.52\)</span> and <span class="math notranslate nohighlight">\(m2=0.26\)</span>.</p></li>
+<li><p>It would prove useful for you to adjust the parameters, observed values and inputs for the continuous design variables. The numbers were chosen to demonstrate the methods can give good results. They do not always return such good numbers.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, The Regents of the University of California
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+
+
+</body>
+</html>

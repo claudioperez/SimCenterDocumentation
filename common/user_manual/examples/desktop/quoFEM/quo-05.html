@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.1. Basic modeling with Python &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="6.2. Forward Propagation - OpenSees/Tcl" href="quo-01.html" />
+    <link rel="prev" title="6. Examples" href="../examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+
+          
+            <a href="../../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../../_static/quoFEM-LogoImageGrey.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. Basic modeling with Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uq-workflow">6.1.1. UQ Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-files">6.1.2. Model Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">6.1.3. Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quo-01.html">6.2. Forward Propagation - OpenSees/Tcl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-02.html">6.3. Forward Propagation - OpenSeesPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-03.html">6.4. Reliability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-04.html">6.5. Sensitivity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-06.html">6.6. Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../schemas/schema.html">6. Input File Schema</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">6.1. </span>Basic modeling with Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/quoFEM/quo-05.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-modeling-with-python">
+<h1><span class="section-number">6.1. </span>Basic modeling with Python<a class="headerlink" href="#basic-modeling-with-python" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem folder</p></td>
+<td><p><a class="reference external" href="https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/quo-05">quo-05</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>This example illustrates how Python scripting can be used with quoFEM to
+express general mathematical models without the use of a dedicated
+finite element analysis engine.</p>
+<p>The Rosenbrock function is a <em>test function</em> that is often used to
+evaluate numerical optimization algorithms. It is given by the following
+expression:</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-0">
+<span class="eqno">(6.1.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-0" title="Permalink to this equation">¶</a></span>\[g(x, y)=(a-x)^{2}+b\left(y-x^{2}\right)^{2}\]</div>
+<p>A forward propagation analysis will be conducted to numerically
+integrate the first and second moments of a random variable whose value
+is obtained by applying the Rosenbrock function to the two following
+statistically independent random variables:</p>
+<ol class="arabic simple">
+<li><p>First variable, <code class="docutils literal notranslate"><span class="pre">X</span></code>: <strong>Uniform</strong> distribution with a lower bound
+<span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(-2.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of
+<span class="math notranslate nohighlight">\(2.0\)</span>,</p></li>
+<li><p>Second variable, <code class="docutils literal notranslate"><span class="pre">Y</span></code>: <strong>Uniform</strong> distribution with a lower bound
+<span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(1.4\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span> of
+<span class="math notranslate nohighlight">\(1.6\)</span>,</p></li>
+</ol>
+<div class="section" id="uq-workflow">
+<h2><span class="section-number">6.1.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
+<p>The objective of this UQ problem is to numerically integrate the
+following integrals with a forward propagation routine:</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-1">
+<span class="eqno">(6.1.2)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-1" title="Permalink to this equation">¶</a></span>\[\mu_g = \mathbf{E}[g(X,Y)] = \int^{1.6}_{1.4} \int^{2.0}_{-2.0} g(x,y) f_{XY} (x,y) dx dy\]</div>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-2">
+<span class="eqno">(6.1.3)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{align}
+\sigma_g^2 &amp;= \mathbf{E}[(g(X,Y)-\mathbf{E}[g(X,Y)])^2] \\
+&amp;= \int^{1.6}_{1.4} \int^{2.0}_{-2.0} (g(x,y)-\mathbf{E}[g(X,Y)])^2f_{XY} (x,y) dx dy
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> is the joint probability density function of
+the random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>This procedure is implemented with a Latin hypercube sampling routine in
+quoFEM by entering the following inputs in the <strong>UQ</strong> tab:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 79%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Method</strong></p></td>
+<td><p>LHS</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Samples</strong></p></td>
+<td><p>200</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Seed</strong></p></td>
+<td><p>949</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="model-files">
+<h2><span class="section-number">6.1.2. </span>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
+<p>For this forward propagation problem, we need to define a Python script
+that will import a set of random variable values, apply them to the
+Rosenbrock function, then write the results to a file named
+<code class="docutils literal notranslate"><span class="pre">results.out</span></code> for every random variable realization generated by
+Dakota. To this end, we begin by defining our random variables as Python
+objects as follows, and supplying this as a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script in the
+<strong>Parameters File</strong> field of the <strong>FEM</strong> tab:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p>Although this file will later be used as a Python module, it is
+important to note that in the quoFEM workflow, it is NOT handled as a
+true Python script. Rather, it can be thought of loosely as analogous to
+a C “header file” in that it simply gives us an interface to Dakota from
+Python. The values assigned to the variables at this point will not be
+used.</p>
+<blockquote>
+<div><p><strong>Note</strong>: The <strong>Parameters File</strong> is not a true Python script; For
+the time being, until further documentation about the tool is
+developed, users should only use line-by-line variable definitions in
+this file. Python assignments like <code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">Y</span> <span class="pre">=</span> <span class="pre">0.0,</span> <span class="pre">0.0</span></code> are not
+supported.</p>
+</div></blockquote>
+<p>We can now implement our model for the <strong>Input File</strong> which will begin
+with a star-import from the parameters file we just created. Assuming
+that file was named <code class="docutils literal notranslate"><span class="pre">params.py</span></code>, this import would look like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">params</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Next we define the following simple function which evaluates the
+Rosenbrock function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rosenbrock</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">100.</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mf">2.</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span>
+</pre></div>
+</div>
+<p>Finally, we apply our <code class="docutils literal notranslate"><span class="pre">rosenbrock</span></code> function to the variables we
+imported from <code class="docutils literal notranslate"><span class="pre">params</span></code>, and write the results to a file called
+<code class="docutils literal notranslate"><span class="pre">results.out</span></code>. Note that throughout the forward propagation routine,
+the values assigned to the variables <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> in the <code class="docutils literal notranslate"><span class="pre">params</span></code>
+interface are varied by the workflow application.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;results.out&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rosenbrock</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.60g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The code from these steps is colleted and made available for download in
+the following files:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/rosenbrock/rosenbrock.py">rosenbrock.py</a>:
+This file is a Python script which implements the Rosenbrock
+function. It is supplied to the <strong>Input Script</strong> field of the <strong>FEM</strong>
+tab. Because this file write directly to <code class="docutils literal notranslate"><span class="pre">results.out</span></code>, it obviates
+the need for supplying a <strong>Postprocess Script</strong>. When invoked in the
+workflow, the Python routine is supplied a set of random variable
+realizations through the star-import of the script supplied to the
+<strong>Parameters File</strong> field.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/rosenbrock/params.py">params.py</a>:
+This file is a Python script which defines the problem’s random
+variables as objects in the Python runtime. It is supplied to the
+<strong>Parameters File</strong> field of the <strong>FEM</strong> tab. <em>The literal values
+which are assigned to variables in this file will be varied at
+runtime by the UQ engine.</em></p></li>
+</ol>
+<!-- <div class="admonition warning">Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</div> --></div>
+<div class="section" id="results">
+<h2><span class="section-number">6.1.3. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>The result for a forward propagation run with a maximum of <span class="math notranslate nohighlight">\(200\)</span>
+iterations is:</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-05-3">
+<span class="eqno">(6.1.4)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-05-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\mu_g = 146.519 \\
+\sigma_g = 134.01\end{split}\]</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, The Regents of the University of California
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+
+
+</body>
+</html>
