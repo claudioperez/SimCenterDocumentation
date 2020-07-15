@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.3. Steel Frame: Bayesian Calibration &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="7. Bugs &amp; Feature Requests" href="../../../bugs.html" />
+    <link rel="prev" title="6.2. Steel Frame: Conventional Calibration" href="FrameConv.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+
+          
+            <a href="../../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../../_static/quoFEM-LogoImageGrey.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="TrussOpenSees.html">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FrameConv.html">6.2. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Steel Frame: Bayesian Calibration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">6.3. </span>Steel Frame: Bayesian Calibration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/quoFEM/FrameBaye.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="steel-frame-bayesian-calibration">
+<h1><span class="section-number">6.3. </span>Steel Frame: Bayesian Calibration<a class="headerlink" href="#steel-frame-bayesian-calibration" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem files</p></td>
+<td><p><a class="reference external" href="https://github.com/claudioperez/SimCenterDocumentation/tree/examples/docs/common/user_manual/examples/desktop/quoFEM/src/quo-08">quo-08</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>In this example, Bayesian estimation is used to estimate column
+stiffnesses of a simple steel frame, given data about it’s mode shapes
+and frequencies.</p>
+<p>Provided by Professor Joel Conte and his doctoral students Maitreya
+Kurumbhati and Mukesh Ramancha from UC San Diego, this example looks at
+the following simplified finite element model of a steel building.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/frameFE.png"><img alt="../../../../../_images/frameFE.png" src="../../../../../_images/frameFE.png" style="width: 300px;" /></a>
+</div>
+<p>Each floor slab of the building is made of composite metal deck and is
+supported on four steel columns. The story heights are measured at
+<span class="math notranslate nohighlight">\(10'\)</span> and in plan the side lengths measure <span class="math notranslate nohighlight">\(33'-4&quot;\)</span> by
+<span class="math notranslate nohighlight">\(30'\)</span>. Properties of the steel columns are taken deterministically
+with an elastic modulus of <span class="math notranslate nohighlight">\(29,000 \mathrm{ksi}\)</span>, area of
+<span class="math notranslate nohighlight">\(110 \mathrm{in}^2\)</span>, and principal moment of inertial
+(<span class="math notranslate nohighlight">\(I_{yy}\)</span>) of <span class="math notranslate nohighlight">\(1190 \mathrm{ in}^4\)</span>. For modelling purposes,
+the four columns are assumed fixed at the base and the beams connecting
+them are assumed to be rigid. The first two vibration periods of the
+structure are determined to be <span class="math notranslate nohighlight">\(0.19 \mathrm{sec}\)</span> and <span class="math notranslate nohighlight">\(0.09 \mathrm{sec}\)</span>.</p>
+<p>Using these properties, the following set of mode shapes and frequencies
+are generated by applying random perturbations to the analytic modal
+properties in order to simulate field data that might be obtained using
+a method for structural system identification.</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-framebaye-0">
+<span class="eqno">(6.3.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-framebaye-0" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{array}{l}
+\lambda_{1}^{(1)}=1025.21, \lambda_{1}^{(2)}=1138.11, \quad \lambda_{1}^{(3)}=1099.39, \quad \lambda_{1}^{(4)}=1002.41, \quad \lambda_{1}^{(5)}=1052.69 \\
+\phi_{12}^{(1)}=1.53, \quad \phi_{12}^{(2)}=1.24, \quad \phi_{12}^{(3)}=1.38, \quad \phi_{12}^{(4)}=1.50, \quad \phi_{12}^{(5)}=1.35
+\end{array}\end{split}\]</div>
+<p>Our goal will be to reobtain the original column moments of inertia from
+this data using a conventional calibration procedure.</p>
+<p>The unknown quantities of interest are the moments of inertia for the
+first and second story columns (<code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code> respectively), on
+which we impose the the following bounds and initial estimates:</p>
+<ol class="arabic simple">
+<li><p>First story column moment of inertia, <code class="docutils literal notranslate"><span class="pre">Ic1</span></code>: <strong>ContinuousDesign</strong>
+distribution with a initial point <span class="math notranslate nohighlight">\((X_0)\)</span> of <span class="math notranslate nohighlight">\(1500.0\)</span>,
+lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span>
+of <span class="math notranslate nohighlight">\(2000.0\)</span>,</p></li>
+<li><p>Second story column moment of inertia, <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>: <strong>ContinuousDesign</strong>
+distribution with a initial point <span class="math notranslate nohighlight">\((X_0)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>,
+lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span>
+of <span class="math notranslate nohighlight">\(2000.0\)</span>,</p></li>
+</ol>
+<p>The exercise requires a single OpenSees script file. The user is required to download this file and place it in a <strong>NEW</strong> folder. The file:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/frame/fem.tcl">fem.tcl</a></p></li>
+</ol>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span>
+# units kips, in
+
+set numMeasurements 5
+
+set measuredLambdas {1025.21 1138.11 1099.39 1002.41 1052.69}
+set sigmaLambda 54.203
+
+set measuredPhis {1.53 1.24 1.38 1.50 1.35}
+set sigmaPhi 0.0705
+
+set PI 3.14159
+
+# 
+# some paramaters
+#
+
+set m1 0.52
+set m2 0.26
+
+set L  400.0
+set h  120.0
+set E 29000.0 
+
+set Ac 110.0 
+pset Ic1 1190.0
+pset Ic2 1190.0
+set Ib 10e+8
+set Ab 10e+8 
+
+#
+# build the model
+#
+
+model BasicBuilder -ndm 2 -ndf 3	
+
+# nodes
+node 1   0.  0. ; 
+node 2   $L  0. ;
+node 3   0.  $h          -mass [expr $m1/4.] 0 0
+node 4   $L  $h          -mass [expr $m1/4.0] 0 0
+node 5   0.  [expr 2*$h] -mass [expr $m2/4.0] 0 0
+node 6   $L  [expr 2*$h] -mass [expr $m2/4.0] 0 0
+
+# constraints
+fix 1 1 1 1;
+fix 2 1 1 1;
+equalDOF 3 4 1;
+equalDOF 5 6 1 
+
+# elements
+set TransfTag 1;
+geomTransf Linear $TransfTag ;
+element elasticBeamColumn 1 1 3 $Ac $E $Ic1 $TransfTag; 
+element elasticBeamColumn 2 3 5 $Ac $E $Ic2 $TransfTag; 
+element elasticBeamColumn 3 2 4 $Ac $E $Ic1 $TransfTag; 
+element elasticBeamColumn 4 4 6 $Ac $E $Ic2 $TransfTag; 
+element elasticBeamColumn 5 3 4 $Ab $E $Ib $TransfTag; 
+element elasticBeamColumn 6 5 6 $Ab $E $Ib $TransfTag;
+
+# calculate eigenvalues
+set numModes 2
+set eigenValues [eigen -fullGenLapack $numModes]
+
+set phi [expr [nodeEigenvector 5 1 1] / [nodeEigenvector 3 1 1]]
+set lambda [lindex $eigenValues 0]
+
+set error {}
+for {set m 0} {$m &lt; $numMeasurements} {incr m 1} {
+    lappend error [expr ([lindex $measuredLambdas $m] - $lambda) / $sigmaLambda]
+}
+for {set m 0} {$m &lt; $numMeasurements} {incr m 1} {
+    lappend error [expr ([lindex $measuredPhis $m] - $phi) / $sigmaPhi]
+}
+
+# create results file
+set outFile [open &quot;results.out&quot; w]
+puts $outFile &quot;$error&quot;
+close $outFile
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The tcl script when it runs creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code>. As a consequence, no postprocessing script is needed.</p></li>
+</ol>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like me, your root, Downloads or Documents folders contains and awful lot of files.</p>
+</div>
+<p>The steps involved:</p>
+<ol class="arabic simple">
+<li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota. In the <strong>UQ Method</strong> category drop down menu change the category to <strong>Inverse Problem</strong>, the method as <strong>DREAM</strong>,  and the remaining parameters as shown in the figure.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelBayeUQ.png" src="../../../../../_images/joelBayeUQ.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Next select the <strong>FEM</strong> tab from the input panel selection. This will default to the OpenSees FEM engine. For the main script copy the path name to the <code class="docutils literal notranslate"><span class="pre">fem.tcl</span></code> file or select <strong>choose</strong> and navigate to the file.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelBayeFEM.png" src="../../../../../_images/joelBayeFEM.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As discussed but it is worth noting again, because the script generates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file, no postprocessing script is needed for this example. This might not always be the case for some of your problems.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Next select the <strong>RV</strong> tab from the input panel. This should be prepopulated with two random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script, i.e. <code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>. For each variable, from the drop down menu change them from having a constant distribution to a continuous design one and then provide the lower bounds and upper bounds shown in the figure below.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelBayeRV.png" src="../../../../../_images/joelBayeRV.png" />
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Next select the <strong>QoI</strong> panel. Here enter <strong>10</strong> variable names. The following figure shows the first nine names used; the tenth entry used, which does not show up in the image was <code class="docutils literal notranslate"><span class="pre">eps_p5</span></code>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelCalQoI.png" src="../../../../../_images/joelCalQoI.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by Dakota to return information on the errors.</p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch Dakota. When done the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters, <code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code> are <strong>1168.83</strong> and <strong>1211.25</strong> respectively.</p></li>
+</ol>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, The Regents of the University of California
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+
+
+</body>
+</html>

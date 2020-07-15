@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4.2. FEM: Finite Element Method &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="4.3. RV: Random Variables" href="../RV.html" />
+    <link rel="prev" title="4.1.1.5. Inverse Problem" href="../DakotaInverseProblems.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+
+          
+            <a href="../../../../../index.html">
+          
+
+          
+            
+            <img src="../../../../../_static/quoFEM-LogoImageGrey.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../usage.html">4. User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../UQ.html">4.1. UQ: Uncertainty Quantification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.2. FEM: Finite Element Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.2.1. OpenSees</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feappv">4.2.2. FEAPpv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openseespy">4.2.3. OpenSeesPy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../RV.html">4.3. RV: Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QuantitiesOfInterest.html">4.4. QoI: Quantities of Interest</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/desktop/examples.html">6. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../usage.html"><span class="section-number">4. </span>User Guide</a> &raquo;</li>
+        
+      <li><span class="section-number">4.2. </span>FEM: Finite Element Method</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/common/user_manual/usage/desktop/quoFEM/FEM.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fem-finite-element-method">
+<span id="lblfem"></span><h1><span class="section-number">4.2. </span>FEM: Finite Element Method<a class="headerlink" href="#fem-finite-element-method" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>FEM</strong> tab will present users with a selection of FEM applications. Currently, there are three applications available: OpenSees, FEAPpv and OpenSeesPy. More FE platforms will be added in future versions to allow users to provide their own simulation application.</p>
+<div class="align-center figure" id="id2">
+<span id="figfem"></span><img alt="../../../../../_images/fem.png" src="../../../../../_images/fem.png" />
+<p class="caption"><span class="caption-number">Fig. 4.2.1 </span><span class="caption-text">Input for the <strong>FEM</strong> tab.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because the UQ engines treat the FEM applications as a black box, when the UQ engine runs each deterministic simulation it expects the FEM application to output a single file. This file must be named <code class="docutils literal notranslate"><span class="pre">results.out</span></code> and be placed in the same directory as the main input file. The <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file must contain a single line. That line must contain as many QoI values as the user will enter in the <strong>QoI</strong> panel. Each value must be separated by a space. An example <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file for a problem specifying four response QoI values is as shown:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">63.8314</span> <span class="mf">43.312</span> <span class="mf">0.846004</span> <span class="mf">0.00587503</span> 
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">4.2.1. </span>OpenSees<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>When the choice of FEM application is OpenSees (the default application), the user is presented with the input panel shown in figure above and their are two entry fields for filenames:</p>
+<ol class="arabic simple">
+<li><p><strong>Input Script</strong>: The user must specify a main input script. When entered the application will parse this file looking for variables set with the <code class="docutils literal notranslate"><span class="pre">pset</span></code> option (a unique set command to the OpenSees interpreter that is used to identify parameter values). For each variable whose value is set with <code class="docutils literal notranslate"><span class="pre">pset</span></code>, the program will auto populate the variable in the <strong>RV</strong> tab.</p></li>
+</ol>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="c"># units kN &amp; mm</span>
+
+<span class="c">#</span>
+<span class="c"># set some parameters</span>
+<span class="c">#</span>
+
+<span class="nv">pset</span> E <span class="mi">205</span>
+<span class="nv">pset</span> P <span class="mi">25</span>
+<span class="nv">pset</span> Au <span class="mi">500</span>
+<span class="nv">pset</span> Ao <span class="mi">250</span>
+
+<span class="c">#</span>
+<span class="c"># build the model</span>
+<span class="c">#</span>
+
+<span class="nv">model</span> Basic <span class="o">-</span>ndm <span class="mi">2</span> <span class="o">-</span>ndf <span class="mi">2</span>
+
+<span class="nv">node</span> <span class="mi">1</span>     <span class="mi">0</span>    <span class="mi">0</span>
+<span class="nv">node</span> <span class="mi">2</span>  <span class="mi">4000</span>    <span class="mi">0</span>
+<span class="nv">node</span> <span class="mi">3</span>  <span class="mi">8000</span>    <span class="mi">0</span>
+<span class="nv">node</span> <span class="mi">4</span> <span class="mi">12000</span>    <span class="mi">0</span>
+<span class="nv">node</span> <span class="mi">5</span>  <span class="mi">4000</span> <span class="mi">4000</span>
+<span class="nv">node</span> <span class="mi">6</span>  <span class="mi">8000</span> <span class="mi">4000</span>
+
+<span class="nv">fix</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="nv">fix</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="nv">uniaxialMaterial</span> Elastic <span class="mi">1</span> <span class="nv">$E</span>
+
+<span class="nv">element</span> truss <span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="nv">$Ao</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">2</span> <span class="mi">2</span> <span class="mi">3</span> <span class="nv">$Ao</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">3</span> <span class="mi">3</span> <span class="mi">4</span> <span class="nv">$Ao</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">4</span> <span class="mi">1</span> <span class="mi">5</span> <span class="nv">$Au</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">5</span> <span class="mi">5</span> <span class="mi">6</span> <span class="nv">$Au</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">6</span> <span class="mi">6</span> <span class="mi">4</span> <span class="nv">$Au</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">7</span> <span class="mi">2</span> <span class="mi">5</span> <span class="nv">$Ao</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">8</span> <span class="mi">3</span> <span class="mi">6</span> <span class="nv">$Ao</span> <span class="mi">1</span>
+<span class="nv">element</span> truss <span class="mi">9</span> <span class="mi">5</span> <span class="mi">3</span> <span class="nv">$Ao</span> <span class="mi">1</span>
+<span class="nv">timeSeries</span> Linear <span class="mi">1</span>
+<span class="nv">pattern</span> Plain <span class="mi">1</span> <span class="mi">1</span> <span class="k">{</span>
+    <span class="nb">load</span> <span class="mi">2</span> <span class="mi">0</span> <span class="k">[expr</span> <span class="o">-</span><span class="nv">$P</span><span class="k">]</span>
+    <span class="nb">load</span> <span class="mi">3</span> <span class="mi">0</span> <span class="k">[expr</span> <span class="o">-</span><span class="nv">$P</span><span class="k">]</span>
+<span class="k">}</span>
+
+<span class="c">#</span>
+<span class="c"># build and perform the analysis</span>
+<span class="c">#</span>
+
+<span class="nv">algorithm</span> Linear
+<span class="nv">integrator</span> LoadControl <span class="mf">1.0</span>
+<span class="nv">system</span> ProfileSPD
+<span class="nv">numberer</span> RCM
+<span class="nv">constraints</span> Plain
+<span class="nv">analysis</span> Static
+<span class="nv">analyze</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Postprocess Script</strong>: This is an optional entry where the user has the option of specifying either a tcl script or a Python script that will be used to postprocess the results and create a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file after the main script runs.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The postprocess file can be either a tcl script or a Python script and the file extensions must be either <code class="docutils literal notranslate"><span class="pre">.py</span></code> or <code class="docutils literal notranslate"><span class="pre">.tcl</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If a tcl script file and the user is reading results from files created with OpenSees recorder commands, the user must ensure there is a <code class="docutils literal notranslate"><span class="pre">wipe</span> <span class="pre">recorders</span></code> command at the end of the main script or at the start of the postprocessing script.</p>
+</div>
+</div>
+<div class="section" id="feappv">
+<h2><span class="section-number">4.2.2. </span>FEAPpv<a class="headerlink" href="#feappv" title="Permalink to this headline">¶</a></h2>
+<p>Similar to the OpenSees application, when the user selects FEAPpv the user is requested to provide two files.</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/feapFEM.png" src="../../../../../_images/feapFEM.png" />
+</div>
+<ol class="arabic simple">
+<li><p><strong>Input File</strong>: The user must specify a main input file.  A part of this file may contain variables set in the <code class="docutils literal notranslate"><span class="pre">PARA</span></code> section. The variables in this section will be read by the UI when the file is entered and will be autopopulated in the <strong>RV</strong> tab. For example if a file containing the following code was specified:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FEAP</span> <span class="o">*</span> <span class="o">*</span> <span class="n">Elastic</span> <span class="n">Truss</span>
+<span class="mi">6</span> <span class="mi">9</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span>
+
+<span class="n">PARAmeter</span>
+<span class="n">E</span> 	<span class="o">=</span> <span class="mi">205</span>
+<span class="n">P</span> 	<span class="o">=</span> <span class="mi">25</span>
+<span class="n">A2</span>	<span class="o">=</span> <span class="mi">500</span>
+<span class="n">A1</span> 	<span class="o">=</span> <span class="mi">250</span>
+
+<span class="n">MATErial</span> <span class="mi">1</span>
+<span class="n">TRUSs</span>
+<span class="n">ELAStic</span> <span class="n">isotropic</span> <span class="n">E</span>
+<span class="n">CROSs</span> <span class="n">section</span> <span class="n">A1</span>
+
+<span class="n">MATErial</span> <span class="mi">2</span>
+<span class="n">TRUSs</span>
+<span class="n">ELAStic</span> <span class="n">isotropic</span> <span class="n">E</span>
+<span class="n">CROSs</span> <span class="n">section</span> <span class="n">A2</span>
+
+<span class="n">COORdinates</span>
+<span class="mi">1</span>	<span class="mi">0</span>	<span class="mf">0.0</span>		<span class="mf">0.0</span>
+<span class="mi">2</span>	<span class="mi">0</span>	<span class="mf">4e+3</span>		<span class="mf">0.0</span>
+<span class="mi">3</span>	<span class="mi">0</span>	<span class="mf">8e+3</span>		<span class="mf">0.0</span>
+<span class="mi">4</span>	<span class="mi">0</span>	<span class="mf">12e+3</span>		<span class="mf">0.0</span>
+<span class="mi">5</span>	<span class="mi">0</span>	<span class="mf">8e+3</span>		<span class="mf">4e+3</span>
+<span class="mi">6</span>	<span class="mi">0</span>	<span class="mf">4e+3</span>		<span class="mf">4e+3</span>
+
+<span class="n">ELEMents</span>
+<span class="mi">1</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">1</span>	<span class="mi">2</span>
+<span class="mi">2</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">2</span>	<span class="mi">3</span>
+<span class="mi">3</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">3</span>	<span class="mi">4</span>
+<span class="mi">4</span>	<span class="mi">0</span>	<span class="mi">2</span>	<span class="mi">4</span>	<span class="mi">5</span>
+<span class="mi">5</span>	<span class="mi">0</span>	<span class="mi">2</span>	<span class="mi">5</span>	<span class="mi">6</span>
+<span class="mi">6</span>	<span class="mi">0</span>	<span class="mi">2</span>	<span class="mi">6</span>	<span class="mi">1</span>
+<span class="mi">7</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">2</span>	<span class="mi">6</span>
+<span class="mi">8</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">6</span>	<span class="mi">3</span>
+<span class="mi">9</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">3</span>	<span class="mi">5</span>
+
+<span class="n">BOUNdary</span>
+<span class="mi">1</span>	<span class="mi">0</span>	<span class="mi">1</span>	<span class="mi">1</span>
+<span class="mi">4</span>	<span class="mi">0</span>	<span class="mi">0</span>	<span class="mi">1</span>
+
+<span class="n">FORCe</span>
+<span class="mi">2</span>	<span class="mi">0</span>	<span class="mf">0.0</span>	<span class="o">-</span><span class="n">P</span>
+<span class="mi">3</span>	<span class="mi">0</span>	<span class="mf">0.0</span>	<span class="o">-</span><span class="n">P</span>
+
+<span class="n">END</span>
+<span class="n">BATCh</span>
+<span class="n">TANG</span>
+<span class="n">FORM</span>
+<span class="n">SOLVe</span>
+<span class="n">DISPlacement</span> <span class="n">ALL</span>
+<span class="n">END</span>
+<span class="n">STOP</span>
+</pre></div>
+</div>
+<p>then the parameters <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code>, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>, <code class="docutils literal notranslate"><span class="pre">Au</span></code> would be read by the application and placed in the <strong>RV</strong> tab.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Postprocess Script</strong>: The user must provide the name of the Python script that will run when FEAPpv has finished executing. This Python script must load the output file from FEAPpv and create the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file. Currently the user has no control over the name of the output file created by FEAPpv, <code class="docutils literal notranslate"><span class="pre">SimCenterOut.txt</span></code>. It is this file the postprocess script must open and use to create the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file.</p></li>
+</ol>
+</div>
+<div class="section" id="openseespy">
+<h2><span class="section-number">4.2.3. </span>OpenSeesPy<a class="headerlink" href="#openseespy" title="Permalink to this headline">¶</a></h2>
+<p>For the OpenSeesPy application, the user provides a main script and has the option to provide 2 other scripts:</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/openseespyFEM.png" src="../../../../../_images/openseespyFEM.png" />
+</div>
+<ol class="arabic simple">
+<li><p><strong>Postprocess Script</strong>. This must be a Python script which is provided the QoI variable names when started. This entry can be left blank if the main script creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file with a single line as described for the OpenSees application.</p></li>
+<li><p><strong>Parameters File</strong> (Optional). This file allows for the automatic population of the <strong>RV</strong> tab with any variables found in the file. For example if the file contained the following:</p></li>
+</ol>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>
+<span class="n">E</span>  <span class="o">=</span> <span class="mf">205.0</span>
+<span class="n">P</span>  <span class="o">=</span> <span class="mf">25.0</span>
+<span class="n">Ao</span> <span class="o">=</span> <span class="mf">250.0</span>
+<span class="n">Au</span> <span class="o">=</span> <span class="mf">500.0</span>
+</pre></div>
+</div>
+<p>The <strong>RV</strong> tab would be populated with the <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code>, <code class="docutils literal notranslate"><span class="pre">Ao</span></code>, and <code class="docutils literal notranslate"><span class="pre">Au</span></code> random variables.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, The Regents of the University of California
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+
+
+</body>
+</html>
