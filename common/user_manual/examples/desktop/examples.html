@@ -37,8 +37,13 @@
   <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="6.1. Basic modeling with Python" href="quoFEM/quo-05.html" />
-    <link rel="prev" title="5.2. Issues While Running" href="../../troubleshooting/desktop/troubleshootingRunning.html" /> 
+    <link rel="next" title="6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity" href="quoFEM/TrussOpenSees.html" />
+    <link rel="prev" title="5.2. Issues While Running" href="../../troubleshooting/desktop/troubleshootingRunning.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,14 +98,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../usage/desktop/usage.html">4. User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-05.html">6.1. Basic modeling with Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-01.html">6.2. Forward Propagation - OpenSees/Tcl</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-02.html">6.3. Forward Propagation - OpenSeesPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-03.html">6.4. Reliability Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-04.html">6.5. Sensitivity Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-06.html">6.6. Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quoFEM/quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/TrussOpenSees.html">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FrameConv.html">6.2. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FrameBaye.html">6.3. Steel Frame: Bayesian Calibration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
@@ -117,7 +117,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../schemas/schema.html">6. Input File Schema</a></li>
 </ul>
 
             
@@ -184,28 +183,13 @@
             
   <div class="section" id="examples">
 <span id="lbl-examples"></span><h1><span class="section-number">6. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><p>The following are a few examples showing the usage of quoFEM. Video companions showing these examples are also provided for selected problems. The files for the examples are available on Github.</p>
-</div></blockquote>
-<p>Exploring <strong>FEM</strong> Engines</p>
+<p>The following are a few examples showing the usage of quoFEM. Video companions showing these examples are also provided for selected problems. The files for the examples are available on Github.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-05.html">6.1. Basic modeling with Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-01.html">6.2. Forward Propagation - OpenSees/Tcl</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-02.html">6.3. Forward Propagation - OpenSeesPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/TrussOpenSees.html">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/FrameConv.html">6.2. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/FrameBaye.html">6.3. Steel Frame: Bayesian Calibration</a></li>
 </ul>
-</div>
-<p>Exploring <strong>UQ</strong> Routines</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-03.html">6.4. Reliability Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-04.html">6.5. Sensitivity Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-06.html">6.6. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-07.html">6.7. Conventional Calibration - Steel Frame</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quoFEM/quo-08.html">6.8. Bayesian Calibration - Steel Frame</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
 </div>
 </div>
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Conventional Calibration - Steel Frame &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>6.2. Steel Frame: Conventional Calibration &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -37,6 +37,8 @@
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="6.3. Steel Frame: Bayesian Calibration" href="FrameBaye.html" />
+    <link rel="prev" title="6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity" href="TrussOpenSees.html" />
 <script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
@@ -89,13 +91,18 @@
             
             
               <p class="caption"><span class="caption-text">User Manual</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">6. Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="TrussOpenSees.html">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FrameBaye.html">6.3. Steel Frame: Bayesian Calibration</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
 </ul>
@@ -155,13 +162,15 @@
     
       <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Conventional Calibration - Steel Frame</li>
+          <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">6.2. </span>Steel Frame: Conventional Calibration</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../../_sources/common/user_manual/examples/desktop/quoFEM/quo-07.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/quoFEM/FrameConv.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,8 +183,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="conventional-calibration-steel-frame">
-<h1>Conventional Calibration - Steel Frame<a class="headerlink" href="#conventional-calibration-steel-frame" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="steel-frame-conventional-calibration">
+<h1><span class="section-number">6.2. </span>Steel Frame: Conventional Calibration<a class="headerlink" href="#steel-frame-conventional-calibration" title="Permalink to this headline">¶</a></h1>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 22%" />
@@ -189,13 +198,12 @@
 </table>
 <p>In this example, a parameter estimation routine is used to estimate
 column stiffnesses of a simple steel frame, given data about it’s mode
-shapes and mass distribution.</p>
+shapes and frequencies.</p>
 <p>Provided by Professor Joel Conte and his doctoral students Maitreya
 Kurumbhati and Mukesh Ramancha from UC San Diego, this example looks at
 the following simplified finite element model of a steel building.</p>
-<div class="figure align-default" id="id1">
-<a class="reference internal image-reference" href="../../../../../_images/frameFE.png"><img alt="Schematic model of frame." src="../../../../../_images/frameFE.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text">Schematic model of frame.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/frameFE.png"><img alt="../../../../../_images/frameFE.png" src="../../../../../_images/frameFE.png" style="width: 300px;" /></a>
 </div>
 <p>Each floor slab of the building is made of composite metal deck and is
 supported on four steel columns. The story heights are measured at
@@ -206,13 +214,13 @@ with an elastic modulus of <span class="math notranslate nohighlight">\(29,000 \
 (<span class="math notranslate nohighlight">\(I_{yy}\)</span>) of <span class="math notranslate nohighlight">\(1190 \mathrm{ in}^4\)</span>. For modelling purposes,
 the four columns are assumed fixed at the base and the beams connecting
 them are assumed to be rigid. The first two vibration periods of the
-structure are determined to be <span class="math notranslate nohighlight">\(0.19 sec\)</span> and <span class="math notranslate nohighlight">\(0.09 sec\)</span>.</p>
+structure are determined to be <span class="math notranslate nohighlight">\(0.19 \mathrm{sec}\)</span> and <span class="math notranslate nohighlight">\(0.09 \mathrm{sec}\)</span>.</p>
 <p>Using these properties, the following set of mode shapes and frequencies
 are generated by applying random perturbations to the analytic modal
 properties in order to simulate field data that might be obtained using
 a method for structural system identification.</p>
-<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-quo-07-0">
-<span class="eqno">()<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-quo-07-0" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{array}{l}
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-quofem-frameconv-0">
+<span class="eqno">(6.2.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-quofem-frameconv-0" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{array}{l}
 \lambda_{1}^{(1)}=1025.21, \lambda_{1}^{(2)}=1138.11, \quad \lambda_{1}^{(3)}=1099.39, \quad \lambda_{1}^{(4)}=1002.41, \quad \lambda_{1}^{(5)}=1052.69 \\
 \phi_{12}^{(1)}=1.53, \quad \phi_{12}^{(2)}=1.24, \quad \phi_{12}^{(3)}=1.38, \quad \phi_{12}^{(4)}=1.50, \quad \phi_{12}^{(5)}=1.35
 \end{array}\end{split}\]</div>
@@ -231,90 +239,145 @@ distribution with a initial point <span class="math notranslate nohighlight">\((
 lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(500.0\)</span>, upper bound <span class="math notranslate nohighlight">\((U_B)\)</span>
 of <span class="math notranslate nohighlight">\(2000.0\)</span>,</p></li>
 </ol>
-<div class="section" id="uq-workflow">
-<h2>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this headline">¶</a></h2>
-<p>To define the uncertainty workflow in quoFEM, select <strong>Parameters
-Estimation</strong> for the <strong>Dakota Method Category</strong>, and enter the following
-inputs:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 79%" />
-<col style="width: 21%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Convergence Tol</strong></p></td>
-<td><p>1e-10</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Scaling Factors</strong></p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Max No. Iterations</strong></p></td>
-<td><p>50</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Method</strong></p></td>
-<td><p>NL2SOL</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="model-files">
-<h2>Model Files<a class="headerlink" href="#model-files" title="Permalink to this headline">¶</a></h2>
-<p>The following files make up the <strong>FEM</strong> model definition.</p>
+<p>The exercise requires a single OpenSees script file. The user is required to download this file and place it in a <strong>NEW</strong> folder. The file:</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/frame/fem.tcl">fem.tcl</a>:
-This file is an OpenSees Tcl script that defines a FE model for a
-given realization, runs an analysis, and creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code>
-file. As a consequence, no postprocessing script is needed. The
-values placed in <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file are the difference between
-computed and observed values. Expressed another way, the function
-<code class="docutils literal notranslate"><span class="pre">f(Ic1,Ic2)</span></code> computed and written to the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is
-<code class="docutils literal notranslate"><span class="pre">f(Ic1,Ic2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(Ic1,Ic2)</span></code>. The UQ
-algorithm when running is searching for values of the random variable
-parameters (<code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>) that minimize this loss function.
-The user must take this fact into account when formulating the output
-from their own scripts for their own problems.</p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/claudioperez/SimCenterExamples/master/static/frame/fem.tcl">fem.tcl</a></p></li>
 </ol>
-<!-- <div class="admonition warning">Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</div> --></div>
-<div class="section" id="results">
-<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
-<p>Once the analysis is complete the <strong>RES</strong> tab will be automatically
-selected and the results will be displayed as shown in the figure below.</p>
-<p>The resulting estimates for the column stiffnesses, <code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>
-are <strong>1168.83</strong> and <strong>1211.25</strong> respectively.</p>
-<div id="vis"></div><script>
-    // Assign the specification to a local variable vlSpec.
-    var vlSpec = {
-    $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
-    data: {
-        values: [
-        {a: 'C', b: 2},
-        {a: 'C', b: 7},
-        {a: 'C', b: 4},
-        {a: 'D', b: 1},
-        {a: 'D', b: 2},
-        {a: 'D', b: 6},
-        {a: 'E', b: 8},
-        {a: 'E', b: 4},
-        {a: 'E', b: 7}
-        ]
-    },
-    mark: 'bar',
-    encoding: {
-        y: {field: 'a', type: 'nominal'},
-        x: {
-        aggregate: 'average',
-        field: 'b',
-        type: 'quantitative',
-        axis: {
-            title: 'Average of b'
-        }
-        }
-    }
-    };
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span>
+# units kips, in
 
-    // Embed the visualization in the container with id `vis`
-    vegaEmbed('#vis', vlSpec);
-</script></div>
+set numMeasurements 5
+
+set measuredLambdas {1025.21 1138.11 1099.39 1002.41 1052.69}
+set sigmaLambda 54.203
+
+set measuredPhis {1.53 1.24 1.38 1.50 1.35}
+set sigmaPhi 0.0705
+
+set PI 3.14159
+
+# 
+# some paramaters
+#
+
+set m1 0.52
+set m2 0.26
+
+set L  400.0
+set h  120.0
+set E 29000.0 
+
+set Ac 110.0 
+pset Ic1 1190.0
+pset Ic2 1190.0
+set Ib 10e+8
+set Ab 10e+8 
+
+#
+# build the model
+#
+
+model BasicBuilder -ndm 2 -ndf 3	
+
+# nodes
+node 1   0.  0. ; 
+node 2   $L  0. ;
+node 3   0.  $h          -mass [expr $m1/4.] 0 0
+node 4   $L  $h          -mass [expr $m1/4.0] 0 0
+node 5   0.  [expr 2*$h] -mass [expr $m2/4.0] 0 0
+node 6   $L  [expr 2*$h] -mass [expr $m2/4.0] 0 0
+
+# constraints
+fix 1 1 1 1;
+fix 2 1 1 1;
+equalDOF 3 4 1;
+equalDOF 5 6 1 
+
+# elements
+set TransfTag 1;
+geomTransf Linear $TransfTag ;
+element elasticBeamColumn 1 1 3 $Ac $E $Ic1 $TransfTag; 
+element elasticBeamColumn 2 3 5 $Ac $E $Ic2 $TransfTag; 
+element elasticBeamColumn 3 2 4 $Ac $E $Ic1 $TransfTag; 
+element elasticBeamColumn 4 4 6 $Ac $E $Ic2 $TransfTag; 
+element elasticBeamColumn 5 3 4 $Ab $E $Ib $TransfTag; 
+element elasticBeamColumn 6 5 6 $Ab $E $Ib $TransfTag;
+
+# calculate eigenvalues
+set numModes 2
+set eigenValues [eigen -fullGenLapack $numModes]
+
+set phi [expr [nodeEigenvector 5 1 1] / [nodeEigenvector 3 1 1]]
+set lambda [lindex $eigenValues 0]
+
+set error {}
+for {set m 0} {$m &lt; $numMeasurements} {incr m 1} {
+    lappend error [expr ([lindex $measuredLambdas $m] - $lambda) / $sigmaLambda]
+}
+for {set m 0} {$m &lt; $numMeasurements} {incr m 1} {
+    lappend error [expr ([lindex $measuredPhis $m] - $phi) / $sigmaPhi]
+}
+
+# create results file
+set outFile [open &quot;results.out&quot; w]
+puts $outFile &quot;$error&quot;
+close $outFile
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The tcl script when it runs creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code>. As a consequence, no postprocessing script is needed.</p></li>
+<li><p>The values placed in <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file are the difference between computed and observed values. Expressed another way, the function <code class="docutils literal notranslate"><span class="pre">f(Ic1,Ic2)</span></code> computed and written to the  <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file is <code class="docutils literal notranslate"><span class="pre">f(Ic1,Ic2)</span> <span class="pre">=</span> <span class="pre">ObservedPeriods</span> <span class="pre">-</span> <span class="pre">ComputedPeriods(Ic1,Ic2)</span></code>. The UQ algorithm when running is searching for values of the random variable parameters (<code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>) that attempt to minimize the function. The user must take this fact into account when formulating the output from their own scripts for their own problems.</p></li>
+</ol>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like me, your root, Downloads or Documents folders contains and awful lot of files.</p>
+</div>
+<p>The steps involved:</p>
+<ol class="arabic simple">
+<li><p>Start the application and the UQ Selection will be highlighted. In the panel for the UQ selection, keep the UQ engine as that selected, i.e. Dakota. In the UQ Method category drop down menu change the category to <strong>Parameters Estimation</strong>, and the method as <strong>NL2SOL</strong>, the convergence tolerance to <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code> and leave the scaling factors empty (assumes weights of 1.0 on all response values) as shown in the figure.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelUQ.png" src="../../../../../_images/joelUQ.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Next select the <strong>FEM</strong> tab from the input panel selection. This will default to the OpenSees FEM engine. For the main script copy the path name to the <code class="docutils literal notranslate"><span class="pre">fem.tcl</span></code> file or select <strong>choose</strong> and navigate to the file.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelCalFEM.png" src="../../../../../_images/joelCalFEM.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As discussed but it is worth noting again, because the script generates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file, no postprocessing script is needed for this example. This might not always be the case for some of your problems.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Next select the <strong>RV</strong> tab from the input panel. This should be prepopulated with two random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script, i.e. <code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code>. For each variable, from the drop down menu change them from having a constant distribution to a continuous design one and then provide the lower bounds, upper bounds and the starting points shown in the figure below.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelCalRV.png" src="../../../../../_images/joelCalRV.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the Parameter Estimation category of UQ methods, only continuous design distributions may be entered.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Next select the <strong>QoI</strong> panel. Here enter <strong>10</strong> variable names. The following figure shows the first nine names used; the tenth entry used, which does not show up in the image was <code class="docutils literal notranslate"><span class="pre">eps_p5</span></code>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/joelCalQoI.png" src="../../../../../_images/joelCalQoI.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by Dakota to return information on the errors.</p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch Dakota. When done the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below. The figure shows Dakota returned, for inputs provided, estimates of our unknown parameters, <code class="docutils literal notranslate"><span class="pre">Ic1</span></code> and <code class="docutils literal notranslate"><span class="pre">Ic2</span></code> are <strong>1168.83</strong> and <strong>1211.25</strong> respectively.</p></li>
+</ol>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/quo-07-res-sum.png"><img alt="../../../../../_images/quo-07-res-sum.png" src="../../../../../_images/quo-07-res-sum.png" style="width: 600px;" /></a>
+</div>
 </div>
 
 

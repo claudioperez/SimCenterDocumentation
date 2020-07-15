@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6.2. Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  <title>Steel Frame: Parameter Estimation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
   
 
   
@@ -37,8 +37,11 @@
   <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="7. Bugs &amp; Feature Requests" href="../../../bugs.html" />
-    <link rel="prev" title="6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity" href="TrussOpenSees.html" /> 
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,17 +89,13 @@
             
             
               <p class="caption"><span class="caption-text">User Manual</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../ack.html">1. Acknowledgments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/aboutQUOFEM.html">2. About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">3. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">4. User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">6. Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="TrussOpenSees.html">6.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. Steel Frame: Parameter Estimation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">6. Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../license.html">8. Copyright and License</a></li>
 </ul>
@@ -156,9 +155,7 @@
     
       <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../examples.html"><span class="section-number">6. </span>Examples</a> &raquo;</li>
-        
-      <li><span class="section-number">6.2. </span>Steel Frame: Parameter Estimation</li>
+      <li>Steel Frame: Parameter Estimation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,11 +175,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="steel-frame-parameter-estimation">
-<h1><span class="section-number">6.2. </span>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
-<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <a class="reference internal" href="#lbljoelframe"><span class="std std-numref">Fig. 6.2.1</span></a>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
+<h1>Steel Frame: Parameter Estimation<a class="headerlink" href="#steel-frame-parameter-estimation" title="Permalink to this headline">¶</a></h1>
+<p>Consider the problem of estimating parameters for a model given some experimental data. In this educational example, which has been provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego, a simplified finite element model of a steel building is being developed. Consider the two-story building structure shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">lblJoelFrame</span></code>. Each floor slab of the building is made of composite metal deck and is supported on four steel columns. Story heights of 10’ are measured as are the lengths of the building along the X and Y direction, which are measured at 33’4” and 30’. For the steel columns, Young’s modulus is measured to be <span class="math notranslate nohighlight">\(29,000 \mathrm{ ksi}\)</span>, <span class="math notranslate nohighlight">\(Area = 110 \mathrm{ in}^2\)</span>, and <span class="math notranslate nohighlight">\(I_{xx} = 1190 \mathrm{ in}^4\)</span>. For modelling purposes, the four columns are assumed fixed at the base and the beams connecting them are assumed to be rigid.</p>
 <div class="align-center figure" id="id1">
 <span id="lbljoelframe"></span><a class="reference internal image-reference" href="../../../../../_images/joelFrame.png"><img alt="../../../../../_images/joelFrame.png" src="../../../../../_images/joelFrame.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6.2.1 </span><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Two Story Steel Building</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>What is unknown is the mass of the building. However from data collected the periods of the structure are determined to be 0.19 sec and 0.09 sec. For this exercise the unknown quantities, m1 and m2, the mass of first and second floors to be used in the model will be considered our unknown variables. We will assume some bounds on these variables and provide initial estimates as shown in following table:</p>
 <table class="colwidths-given docutils align-default">
@@ -217,70 +214,6 @@
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/examples/calibrationPeriods/FrameModelPeriodCalibration.tcl">FrameModelPeriodCalibration.tcl</a></p></li>
 </ol>
-<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span># units kips, in
-
-set measuredPeriods {0.19 0.08}
-set PI 3.14159
-
-#
-# some paramaters
-#
-
-pset m1 0.52
-pset m2 0.26
-
-set L  400.0
-set h  120.0
-set E 29000.0 
-
-set Ac 110.0 
-set Ic 1190.0
-set Ib 10e+8
-set Ab 10e+8 
-
-#
-# build the model
-#
-
-model BasicBuilder -ndm 2 -ndf 3	
-# nodes
-node 1   0.  0. ; 
-node 2   $L  0. ;
-node 3   0.  $h -mass [expr $m1/4.] 0 0
-node 4   $L  $h -mass [expr $m1/4.0] 0 0
-node 5   0.  [expr 2*$h] -mass [expr $m2/4.0] 0 0
-node 6   $L  [expr 2*$h] -mass [expr $m2/4.0] 0 0
-# constraints
-fix 1 1 1 1;
-fix 2 1 1 1;
-equalDOF 3 4 1;
-equalDOF 5 6 1 
-# elements
-set TransfTag 1;
-geomTransf Linear $TransfTag ;
-element elasticBeamColumn 1 1 3 $Ac $E $Ic $TransfTag; 
-element elasticBeamColumn 2 3 5 $Ac $E $Ic $TransfTag; 
-element elasticBeamColumn 3 2 4 $Ac $E $Ic $TransfTag; 
-element elasticBeamColumn 4 4 6 $Ac $E $Ic $TransfTag; 
-element elasticBeamColumn 5 3 4 $Ab $E $Ib $TransfTag; 
-element elasticBeamColumn 6 5 6 $Ab $E $Ib $TransfTag;
-
-# calculate eigenvalues
-set numModes 2
-set eigenValues [eigen -fullGenLapack $numModes]
-set error {}
-for {set i 0} {$i&lt;$numModes} {incr i 1} {
-    set period [expr 2*$PI/sqrt([lindex $eigenValues $i])]
-    puts $period
-    lappend error [expr abs([lindex $measuredPeriods $i] - $period)]
-}
-
-# create results file
-set outFile [open &quot;results.out&quot; w]
-puts $outFile &quot;$error&quot;
-close $outFile
-</pre></div>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ol class="arabic simple">
