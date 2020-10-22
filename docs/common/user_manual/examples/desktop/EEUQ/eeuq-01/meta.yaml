@@ -1,0 +1,7 @@
+files:
+- frame_model_tcl
+id: eeuq-01
+synopsis: In this example, the EE-UQ application is used to estimate means and standard
+  deviations of a structural model's displacement response when subjected to earthquake
+  excitations.
+title: Basic Shear Building Procedure

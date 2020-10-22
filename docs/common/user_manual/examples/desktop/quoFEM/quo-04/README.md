@@ -1,8 +1,3 @@
----
-page_template: vega.html
-...
-:page_template: vega.html
-
 
 
 # Sensitivity Analysis
@@ -19,7 +14,6 @@ Consider a stochastic model of a two-dimensional truss structure like that shown
 
 
 The following parameters are defined in the **RV** tab of quoFEM:
-
 
 
 1. Elastic modulus, `E`: **Weibull** distribution with a  scale parameter $(\lambda)$ of $210.0$,  shape parameter $(k)$ of $20.0$, 

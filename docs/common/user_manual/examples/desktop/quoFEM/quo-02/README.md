@@ -1,7 +1,3 @@
----
-page_template: vega.html
-...
-
 
 # Forward Propagation - OpenSeesPy
 
@@ -16,9 +12,7 @@ Consider the problem of uncertainty quantification in a two-dimensional truss st
 ![Truss schematic diagram](figures/truss.png)
 
 
-
 The following parameters are defined in the **RV** tab of quoFEM:
-
 
 
 1. Elastic modulus, `E`: **Weibull** distribution with a  scale parameter $(\lambda)$ of $210.0$,  shape parameter $(k)$ of $20.0$, 
@@ -31,12 +25,10 @@ The following parameters are defined in the **RV** tab of quoFEM:
 
 
 
-
 ## UQ Workflow
 
 
 To define the uncertainty workflow in quoFEM, select **Forward Propagation** for the **Dakota Method Category**, and enter the following inputs:
-
 
 
 |   |   |

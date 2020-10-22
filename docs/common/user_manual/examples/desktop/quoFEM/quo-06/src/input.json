@@ -33,12 +33,12 @@
     ],
     "fem": {
         "dir": "{Current_Dir}/.",
-        "inputFile": "{Current_Dir}/rosenbrock.py",
-        "mainInput": "rosenbrock.py",
+        "inputFile": "{Current_Dir}/Rosen.py",
+        "mainInput": "Rosen.py",
         "mainPostprocessScript": "",
         "numInputs": 1,
-        "parametersFile": "params.py",
-        "parametersScript": "{Current_Dir}/params.py",
+        "parametersFile": "RosenParams.py",
+        "parametersScript": "{Current_Dir}/RosenParams.py",
         "postprocessScript": "",
         "program": "OpenSeesPy"
     },
@@ -47,7 +47,7 @@
             "name": "f"
         }
     ],
-    "$schema": "https://raw.githubusercontent.com/claudioperez/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json",
+    "$schema": "https://raw.githubusercontent.com/NHERI-SimCenter/SimCenterDocumentation/examples/docs/common/user_manual/schemas/quoFEM_Schema.json",
     "Applications": {
         "UQ": {
             "Application": "Dakota-UQ",
