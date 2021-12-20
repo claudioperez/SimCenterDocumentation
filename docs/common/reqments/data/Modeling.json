@@ -6,6 +6,7 @@
   "BM": {
     "target": "Asset Model Generators for Buildings",
     "config_paths": "$.Applications.Modeling.Application",
+    "apps": ["weuq", "eeuq", "qfem", "r2dt"],
     "items": [
       {
         "target": "Ability to quickly create a simple nonlinear building model for simple methods of seismic evaluation",

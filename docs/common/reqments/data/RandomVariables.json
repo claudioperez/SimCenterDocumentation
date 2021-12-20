@@ -43,6 +43,7 @@
       },
       {
         "target": "Define Correlation Matrix",
+	"config": "$.correlationMatrix",
         "fields": ["SP", "M", ""]
       },
       {

@@ -2,6 +2,7 @@
   "UF": {
     "target": "Forward Propagation Methods",
     "config_paths": "$.UQ_Method.samplingMethodData.method",
+    "apps": ["eeuq", "weuq", "qfem"],
     "items": [
       {
         "target": "Ability to use basic Monte Carlo and LHS methods",
@@ -20,12 +21,12 @@
       {
         "target": "Ability to use Multi-Scale Monte Carlo",
         "fields": ["SP", "M", null],
-	"apps": ["qfem"]
+        "apps": ["qfem"]
       },
       {
         "target": "Ability to use Multi-Fidelity Models",
         "fields": ["SP", "M", null],
-	"apps": ["qfem"]
+        "apps": ["qfem"]
       }
     ]
   },
@@ -139,7 +140,7 @@
       {
         "target": "Ability to use TMCMC algorithm for Bayesian inference",
         "fields": ["SP", "M", "Implemented"],
-	"config_values": ["Transitional Markov chain Monte Carlo"]
+        "config_values": ["Transitional Markov chain Monte Carlo"]
       },
       {
         "target": "Ability to read calibration data from file",
@@ -223,12 +224,12 @@
       {
         "target": "Ability to user various Sensitivity Methods",
         "apps": ["qfem", "eeuq"],
-	"config_paths": "$.UQ_Method.uqType",
+        "config_paths": "$.UQ_Method.uqType",
         "items": [
           {
             "target": "Ability to obtain Global Sensitivity Sobol's indices",
             "fields": ["UF", "M", null],
-	    "config_values": ["Sampling Analysis"]
+            "config_values": ["Sampling Analysis"]
           }
         ]
       }
