@@ -6,7 +6,6 @@
 
 # -- SimCenter App selection -------------------------------------------------
 # Selects which app's documentation to build
-
 import os, sys
 from datetime import datetime
 
@@ -46,13 +45,6 @@ app_name2 = app_name.replace("Tool", "")
 loc_app_dir = os.path.abspath(f"../../{app_name}")
 
 print(f"app_name =  {app_name} ({app_abrev}, {app_abrev2})")
-
-# automatically update dependencies
-try:
-    from pip import main as run_pip
-except:
-    from pip._internal import main as run_pip
-run_pip(["install", "-Ur", "../requirements.txt"])
 
 # -- Path setup --------------------------------------------------------------
 
@@ -162,8 +154,6 @@ toc_filter_exclusions = [
     "pelicun",
     "docTestbeds",
 ]
-
-
 
 # -- Project information -----------------------------------------------------
 
