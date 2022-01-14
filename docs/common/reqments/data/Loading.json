@@ -573,8 +573,8 @@
           },
           {
             "target": "Interface with data driven Interface with Vortex Winds DEDM-HRP Web service",
-	    "fields": ["SP", "M", "Implemented"],
-	    "items": []
+            "fields": ["SP", "M", "Implemented"],
+            "items": []
           },
           {
             "target": "Accommodate Data from Wind Tunnel Experiment",
@@ -613,8 +613,8 @@
           },
           {
             "target": "Ability to utilize synthetic wind loading algorithms per Wittig and Sinha",
-	    "fields": ["SP", "D", "Implemented"],
-	    "items": []
+            "fields": ["SP", "D", "Implemented"],
+            "items": []
           },
           {
             "target": "Hazard modification by terrain, topography, and nearby buildings",
